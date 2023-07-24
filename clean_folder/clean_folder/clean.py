@@ -64,7 +64,7 @@ def normalize(name: str) -> None:
 # CONVERT_.format_to_DIR
 
 def convert_FORMAT_to_DIR(name_file: str) -> str:
-    # print(name_file)                                               # <= for debug
+    # print(name_file)                                              
     if Path(name_file).suffix:
         return Path(name_file).suffix.upper().replace('.', '')
 
@@ -160,6 +160,11 @@ def handle_folder(folder: Path):
     except OSError:
         print(f"Can't delete folder: {folder}")
 
+def start_script():
+    if sys.argv[1]:
+        FOLDER_TO_SCAN = Path(sys.argv[1])
+        print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
+        main(FOLDER_TO_SCAN.resolve())
 
 if __name__ == "__main__":
     if sys.argv[1]:
