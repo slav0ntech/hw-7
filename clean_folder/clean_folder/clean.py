@@ -64,7 +64,7 @@ def normalize(name: str) -> None:
 # CONVERT_.format_to_DIR
 
 def convert_FORMAT_to_DIR(name_file: str) -> str:
-    # print(name_file)                                              
+    # print(name_file)
     if Path(name_file).suffix:
         return Path(name_file).suffix.upper().replace('.', '')
 
@@ -160,20 +160,45 @@ def handle_folder(folder: Path):
     except OSError:
         print(f"Can't delete folder: {folder}")
 
+
+def result() -> None:
+    print(f'DIR_TEMP => {DIR_TEMP}')
+    print(f'KNOWN_FORMATS => {KNOWN_FORMAT}')
+    print(f'UNKNOWN_FORMATS => {UNKNOWN_FORMAT}')
+    print(f'ARCHIVES: {ARCHIVES}')
+    print(f'WITHOUT_FORMAT: {WITHOUT_FORMAT}')
+
+
 def start_script():
-    if sys.argv[1]:
-        FOLDER_TO_SCAN = Path(sys.argv[1])
-        print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
-        main(FOLDER_TO_SCAN.resolve())
+    try:
+        if sys.argv[1] and len(sys.argv) == 2:
+            FOLDER_TO_SCAN = Path(sys.argv[1])
+            print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
+            main(FOLDER_TO_SCAN.resolve())
+        else:
+            print(f'Error. Pased more than 1 argument. Need pass 1 argument -> directory, where script must be make sort files. For example, python3 clean.py <My_dir_with_files>')
+            exit()
+    except IndexError:
+        print(f'Error. Need pass 1 argument -> directory, where script must be make sort files. For example, python3 clean.py <My_dir_with_files>')
+        exit()
+    except FileNotFoundError:
+        print(f'Error. No such file or directory {sys.argv[1]}')
+        exit()
+
 
 if __name__ == "__main__":
-    if sys.argv[1]:
-        FOLDER_TO_SCAN = Path(sys.argv[1])
-        print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
-        main(FOLDER_TO_SCAN.resolve())
-
-print(f'DIR_TEMP => {DIR_TEMP}')
-print(f'KNOWN_FORMATS => {KNOWN_FORMAT}')
-print(f'UNKNOWN_FORMATS => {UNKNOWN_FORMAT}')
-print(f'ARCHIVES: {ARCHIVES}')
-print(f'WITHOUT_FORMAT: {WITHOUT_FORMAT}')
+    try:
+        if sys.argv[1] and len(sys.argv) == 2:
+            FOLDER_TO_SCAN = Path(sys.argv[1])
+            print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
+            main(FOLDER_TO_SCAN.resolve())
+            result()
+        else:
+            print(f'Error. Pased more than 1 argument. Need pass 1 argument -> directory, where script must be make sort files. For example, python3 clean.py <My_dir_with_files>')
+            exit()
+    except IndexError:
+        print(f'Error. Need pass 1 argument -> directory, where script must be make sort files. For example, python3 clean.py <My_dir_with_files>')
+        exit()
+    except FileNotFoundError:
+        print(f'Error. No such file or directory {sys.argv[1]}')
+        exit()
