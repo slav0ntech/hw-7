@@ -10,4 +10,7 @@ sort script with modules
 3. python3 -m build
 4. pip3 list | grep clean_folder  (check install module)
 5. pip3 install -e .
-6. clean_folder <DIR_which_need_to_sort>
+6. Usage:
+```
+  clean_folder <PATH_to_DIR_which_need_to_sort>
+```
