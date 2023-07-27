@@ -171,7 +171,7 @@ def result() -> None:
 
 def start_script():
     if len(sys.argv) == 1:
-        print(f'Error. Need pass 1 argument -> directory. Usage-> clean_folder <My_dir_with_files>')
+        print(f'Error. Need pass 1 argument -> directory. Usage -> clean_folder <My_dir_with_files>')
         return
     FOLDER_TO_SCAN = Path(sys.argv[1])
     print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
@@ -182,18 +182,13 @@ def start_script():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print(f'Error. Need pass 1 argument -> directory. Usage -> clean_folder <My_dir_with_files>')
+        exit()
+    FOLDER_TO_SCAN = Path(sys.argv[1])
+    print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
     try:
-        if len(sys.argv) == 1:
-            FOLDER_TO_SCAN = Path(sys.argv[1])
-            print(f'Start in path_to_dir: {FOLDER_TO_SCAN.resolve()}')
-            main(FOLDER_TO_SCAN.resolve())
-            result()
-        else:
-            print(f'Error. Pased more than 1 argument. Need pass 1 argument -> directory, where script must be make sort files. For example, python3 clean.py <My_dir_with_files>')
-            exit()
-    except IndexError:
-        print(f'Error. Need pass 1 argument -> directory, where script must be make sort files. For example, python3 clean.py <My_dir_with_files>')
-        exit()
+        main(FOLDER_TO_SCAN.resolve())
+
     except FileNotFoundError:
-        print(f'Error. No such file or directory {sys.argv[1]}')
-        exit()
+        print(f'Error. No such file or directory {FOLDER_TO_SCAN.resolve()}')
